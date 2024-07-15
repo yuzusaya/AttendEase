@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{569C5C8B-8529-4A25-9456-C5D43A66A9D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendEase.Shared", "src\AttendEase.Shared\AttendEase.Shared.csproj", "{15A0B4D8-6B3A-4C34-9F6C-ECC30F456867}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendEase.ConsoleApp", "src\AttendEase.ConsoleApp\AttendEase.ConsoleApp.csproj", "{34CC6ADD-1AD4-487F-B492-4AB572BEA267}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15A0B4D8-6B3A-4C34-9F6C-ECC30F456867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A0B4D8-6B3A-4C34-9F6C-ECC30F456867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A0B4D8-6B3A-4C34-9F6C-ECC30F456867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A0B4D8-6B3A-4C34-9F6C-ECC30F456867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34CC6ADD-1AD4-487F-B492-4AB572BEA267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34CC6ADD-1AD4-487F-B492-4AB572BEA267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34CC6ADD-1AD4-487F-B492-4AB572BEA267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34CC6ADD-1AD4-487F-B492-4AB572BEA267}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{15A0B4D8-6B3A-4C34-9F6C-ECC30F456867} = {569C5C8B-8529-4A25-9456-C5D43A66A9D4}
+		{34CC6ADD-1AD4-487F-B492-4AB572BEA267} = {569C5C8B-8529-4A25-9456-C5D43A66A9D4}
+	EndGlobalSection
+EndGlobal
