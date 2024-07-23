@@ -12,11 +12,6 @@ public class DigiSheetApiService : IDigiSheetService
         throw new NotImplementedException();
     }
 
-    public Task Login(string username, string password)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task Login(string staffingAgencyCd, string username, string password)
     {
         throw new NotImplementedException();

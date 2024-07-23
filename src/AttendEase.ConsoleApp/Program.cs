@@ -1,4 +1,4 @@
-﻿using AttendEase.Shared.Services;
+using AttendEase.Shared.Services;
 
 Console.WriteLine("Enter your username:");
 var username = Console.ReadLine();
@@ -21,9 +21,14 @@ do
         pass += keyInfo.KeyChar;
     }
 } while (key != ConsoleKey.Enter);
+Console.WriteLine("");
 try
 {
-    IDigiSheetService digiSheetService = new DigiSheetSeleniumService();
+    IFmNetService fmNetService = new FmNetSeleniumService();
+    await fmNetService.Login(username, pass);
+    Console.WriteLine("Login successful");
+    await fmNetService.GetAttandanceRecords(DateOnly.FromDateTime(DateTime.Now));
+    // IDigiSheetService digiSheetService = new DigiSheetSeleniumService();
 
 }
 catch (Exception ex)

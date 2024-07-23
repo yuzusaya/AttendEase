@@ -13,7 +13,8 @@ public static class SeleniumExtensionMethods
         {
             try
             {
-                driver.Navigate().GoToUrl(Constants.FmNetBaseUrl + url);
+                Console.WriteLine($"Navigating to {url}");
+                driver.Navigate().GoToUrl(url);
 
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Constants.PageTimeoutSeconds));
                 wait.Until(d => d.FindElement(by));
