@@ -5,9 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{569C5C8B-8529-4A25-9456-C5D43A66A9D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendEase.Shared", "src\AttendEase.Shared\AttendEase.Shared.csproj", "{15A0B4D8-6B3A-4C34-9F6C-ECC30F456867}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendEase.Shared", "src\AttendEase.Shared\AttendEase.Shared.csproj", "{15A0B4D8-6B3A-4C34-9F6C-ECC30F456867}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendEase.ConsoleApp", "src\AttendEase.ConsoleApp\AttendEase.ConsoleApp.csproj", "{34CC6ADD-1AD4-487F-B492-4AB572BEA267}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendEase.ConsoleApp", "src\AttendEase.ConsoleApp\AttendEase.ConsoleApp.csproj", "{34CC6ADD-1AD4-487F-B492-4AB572BEA267}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7A030FC6-C309-4F23-B347-6E5D283425B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendEase.UnitTest", "AttendEase.UnitTest\AttendEase.UnitTest.csproj", "{04BCE921-316A-4952-A984-7ED93CADC547}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +27,10 @@ Global
 		{34CC6ADD-1AD4-487F-B492-4AB572BEA267}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34CC6ADD-1AD4-487F-B492-4AB572BEA267}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34CC6ADD-1AD4-487F-B492-4AB572BEA267}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04BCE921-316A-4952-A984-7ED93CADC547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04BCE921-316A-4952-A984-7ED93CADC547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04BCE921-316A-4952-A984-7ED93CADC547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04BCE921-316A-4952-A984-7ED93CADC547}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +38,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{15A0B4D8-6B3A-4C34-9F6C-ECC30F456867} = {569C5C8B-8529-4A25-9456-C5D43A66A9D4}
 		{34CC6ADD-1AD4-487F-B492-4AB572BEA267} = {569C5C8B-8529-4A25-9456-C5D43A66A9D4}
+		{04BCE921-316A-4952-A984-7ED93CADC547} = {7A030FC6-C309-4F23-B347-6E5D283425B1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A88A7172-658A-4AA5-AF26-6CB2BB12DC81}
 	EndGlobalSection
 EndGlobal
