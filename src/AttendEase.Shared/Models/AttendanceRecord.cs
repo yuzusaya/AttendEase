@@ -11,7 +11,7 @@ public record AttendanceRecord
     public TimeOnly ActualEndTime { get; set; }
     public string Remarks { get; set; }
     public AttendanceStatus Status { get; set; }
-    public string Day => Date.ToDateTime(StartTime).DayOfWeek.ToString();
+    public DayOfWeek Day => Date.ToDateTime(StartTime).DayOfWeek;
     public TimeOnly SuggestedStartTime => TimeUtility.GetCheckInTimeFromStartTime(StartTime);
     public TimeOnly SuggestedEndTime => TimeUtility.GetCheckOutTimeFromEndTime(EndTime);
 }

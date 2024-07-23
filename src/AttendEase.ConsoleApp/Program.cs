@@ -1,3 +1,4 @@
+using AttendEase.Shared.Enums;
 using AttendEase.Shared.Services;
 
 Console.WriteLine("Enter your username:");
@@ -24,10 +25,18 @@ do
 Console.WriteLine("");
 try
 {
+    var currentTime = DateTime.Now;
     IFmNetService fmNetService = new FmNetSeleniumService();
     await fmNetService.Login(username, pass);
     Console.WriteLine("Login successful");
-    await fmNetService.GetAttandanceRecords(DateOnly.FromDateTime(DateTime.Now));
+    var attendanceRecords = await fmNetService.GetAttandanceRecords(DateOnly.FromDateTime(currentTime));
+    var pendingSubmitRecords = attendanceRecords.Where(x => x.Status == AttendanceStatus.NotYetFilled && x.Date < DateOnly.FromDateTime(currentTime));
+    var readyToSubmitRecords = pendingSubmitRecords.Where(x => x.Day == DayOfWeek.Saturday || x.Day == DayOfWeek.Sunday || x.SuggestedEndTime != default);
+    Console.WriteLine($"{readyToSubmitRecords.Count()}/{pendingSubmitRecords.Count()} ready to submit");
+    foreach (var record in readyToSubmitRecords)
+    {
+        await fmNetService.SubmitAttendance(record.Date, record.SuggestedStartTime, record.SuggestedEndTime);
+    }
     // IDigiSheetService digiSheetService = new DigiSheetSeleniumService();
 
 }

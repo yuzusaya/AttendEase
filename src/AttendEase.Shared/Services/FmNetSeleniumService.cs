@@ -148,7 +148,7 @@ public class FmNetSeleniumService : IFmNetService
         {
             var record = ConvertToAttendanceRecordFromAttendanceRowHtml(row);
             records.Add(record);
-            //Console.WriteLine(record);
+            Console.WriteLine(record);
         }
         return records;
     }
@@ -169,8 +169,41 @@ public class FmNetSeleniumService : IFmNetService
         wait.Until(d => d.FindElement(By.Id("logout")));
     }
 
-    public Task SubmitAttendance(DateOnly date, TimeOnly startTime, TimeOnly endTime, string remarks)
+    public async Task SubmitAttendance(DateOnly date, TimeOnly startTime, TimeOnly endTime, string remarks = "")
     {
-        throw new NotImplementedException();
+        WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(Constants.PageTimeoutSeconds));
+        wait.Until(d => d.FindElement(By.Name("APPROVALGRD")));
+        //K2024_7_220STH
+        //K2024_7_220STM
+        //K2024_7_220ETH
+        //K2024_7_220ETM
+        //BTNDCDS2024_7_220
+        var inputNameFormat = date.ToString("yyyy_M_d");
+        var startHourInputName = $"K{inputNameFormat}0STH";
+        var startMinuteInputName = $"K{inputNameFormat}0STM";
+        var endHourInputName = $"K{inputNameFormat}0ETH";
+        var endMinuteInputName = $"K{inputNameFormat}0ETM";
+        var submitButtonName = $"BTNDCDS{inputNameFormat}0";
+        var startHourInput = _driver.FindElement(By.Id(startHourInputName));
+        var startMinuteInput = _driver.FindElement(By.Id(startMinuteInputName));
+        var endHourInput = _driver.FindElement(By.Id(endHourInputName));
+        var endMinuteInput = _driver.FindElement(By.Id(endMinuteInputName));
+        var submitButton = _driver.FindElement(By.Id(submitButtonName));
+
+        //fill the form
+        var selectElement = new SelectElement(startHourInput);
+        selectElement.SelectByValue(startTime.Hour.ToString());
+        selectElement = new SelectElement(startMinuteInput);
+        selectElement.SelectByValue(startTime.Minute.ToString());
+        selectElement = new SelectElement(endHourInput);
+        selectElement.SelectByValue(endTime.Hour.ToString());
+        selectElement = new SelectElement(endMinuteInput);
+        selectElement.SelectByValue(endTime.Minute.ToString());
+        submitButton.Click();
+
+        var confirmButtonElement = By.Id("dSubmission1");
+        wait.Until(d => d.FindElement(confirmButtonElement));
+        var confirmButton = _driver.FindElement(confirmButtonElement);
+        confirmButton.Click();
     }
 }

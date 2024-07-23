@@ -19,7 +19,7 @@ public static class TimeUtility
 
     public static TimeOnly GetCheckInTimeFromStartTime(TimeOnly actualTime)
     {
-        if (actualTime == default(TimeOnly))
+        if (actualTime == default)
         {
             return actualTime;
         }
@@ -43,7 +43,7 @@ public static class TimeUtility
 
     public static TimeOnly GetCheckOutTimeFromEndTime(TimeOnly actualTime)
     {
-        if (actualTime == default(TimeOnly))
+        if (actualTime == default)
         {
             return actualTime;
         }

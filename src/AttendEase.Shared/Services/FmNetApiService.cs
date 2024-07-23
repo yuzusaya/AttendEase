@@ -17,7 +17,7 @@ public class FmNetApiService : IFmNetService
         throw new NotImplementedException();
     }
 
-    public Task SubmitAttendance(DateOnly date, TimeOnly startTime, TimeOnly endTime, string remarks)
+    public Task SubmitAttendance(DateOnly date, TimeOnly startTime, TimeOnly endTime, string remarks="")
     {
         throw new NotImplementedException();
     }
