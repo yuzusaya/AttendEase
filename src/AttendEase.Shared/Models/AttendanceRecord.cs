@@ -1,5 +1,6 @@
 using AttendEase.Shared.Enums;
 using AttendEase.Shared.Utilities;
+using System.Text;
 
 namespace AttendEase.Shared.Models;
 public record AttendanceRecord
@@ -14,4 +15,16 @@ public record AttendanceRecord
     public DayOfWeek Day => Date.ToDateTime(StartTime).DayOfWeek;
     public TimeOnly SuggestedStartTime => TimeUtility.GetCheckInTimeFromStartTime(StartTime);
     public TimeOnly SuggestedEndTime => TimeUtility.GetCheckOutTimeFromEndTime(EndTime);
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine($"{Date.ToString("dd/MM")}({Day.ToString()}) - {Status}:");
+        sb.AppendLine($"Time: {StartTime.ToString()} - {EndTime.ToString()}");
+        sb.AppendLine($"Actual Time: {ActualStartTime.ToString()} - {ActualEndTime.ToString()}");
+        if (!string.IsNullOrWhiteSpace(Remarks))
+        {
+            sb.AppendLine($"Remarks: {Remarks}");
+        }
+        return sb.ToString();
+    }
 }
