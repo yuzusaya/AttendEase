@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\AttendEase.Shared\AttendEase.Shared.csproj" />
+    <ProjectReference Include="..\..\src\AttendEase.Shared\AttendEase.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
