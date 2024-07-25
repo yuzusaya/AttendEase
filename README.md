@@ -8,10 +8,8 @@ AttendEase is a system built on top of FM-net and DigiSheet, designed to automat
 
 There are two ways to implement:
 
-1. Api　　
-　　Api will be faster since only the required information is returned.
-2. Simulation of user interaction through selenium　　
-　　This method used headless browser to simulate the user interaction.
+1. Api will be faster since only the required information is returned.
+2. Simulation of user interaction through selenium. This method used headless browser to simulate the user interaction.
 
 # Releases
 
