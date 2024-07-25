@@ -40,7 +40,13 @@ try
         //await digiSheetService.Login("5018", "", pass);
         foreach (var record in readyToSubmitRecords)
         {
-            //todo add confirmation?
+            Console.WriteLine(record.ToString(1));
+            Console.WriteLine("Submit to FM-Net? (Y/N)");
+            var keyInfo = Console.ReadKey(intercept: true);
+            if (keyInfo.Key != ConsoleKey.Y)
+            {
+                continue;
+            }
             await fmNetService.SubmitAttendance(record.Date, record.SuggestedStartTime, record.SuggestedEndTime);
             Console.WriteLine($"Submitted {record.Date} to FM-Net");
             //if success, key in to digisheet as well (if related)

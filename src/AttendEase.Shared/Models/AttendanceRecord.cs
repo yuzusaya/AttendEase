@@ -27,4 +27,16 @@ public record AttendanceRecord
         }
         return sb.ToString();
     }
+    public string ToString(int index)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine($"{Date.ToString("dd/MM")}({Day.ToString()}):");
+        sb.AppendLine($"Time: {StartTime.ToString()} - {EndTime.ToString()}");
+        sb.AppendLine($"Actual Time that will be key in: {SuggestedStartTime.ToString()} - {SuggestedEndTime.ToString()}");
+        if (!string.IsNullOrWhiteSpace(Remarks))
+        {
+            sb.AppendLine($"Remarks: {Remarks}");
+        }
+        return sb.ToString();
+    }
 }
