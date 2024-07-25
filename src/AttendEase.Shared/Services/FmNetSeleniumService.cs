@@ -206,4 +206,9 @@ public class FmNetSeleniumService : IFmNetService
         var confirmButton = _driver.FindElement(confirmButtonElement);
         confirmButton.Click();
     }
+
+    public void Dispose()
+    {
+        _driver?.Dispose();
+    }
 }

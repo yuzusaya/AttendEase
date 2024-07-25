@@ -55,6 +55,8 @@ try
         }
     }
     Console.ReadLine();
+    fmNetService.Dispose();
+    digiSheetService.Dispose();
 }
 catch (Exception ex)
 {

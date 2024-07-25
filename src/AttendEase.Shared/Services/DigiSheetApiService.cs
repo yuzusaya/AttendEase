@@ -7,6 +7,11 @@ using AttendEase.Shared.Models;
 namespace AttendEase.Shared.Services;
 public class DigiSheetApiService : IDigiSheetService
 {
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<List<AttendanceRecord>> GetAttandanceRecords(DateOnly date)
     {
         throw new NotImplementedException();
