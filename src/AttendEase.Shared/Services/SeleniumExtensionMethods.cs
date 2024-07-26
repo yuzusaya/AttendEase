@@ -32,7 +32,8 @@ public static class SeleniumExtensionMethods
             }
             catch (Exception ex)
             {
-                throw new Exception($"An error occurred while navigating to the {url}", ex);
+                Console.WriteLine($"An error occurred while navigating to the {url}");
+                throw;
             }
         }
     }
