@@ -58,6 +58,7 @@ public class FmNetSeleniumService : IFmNetService
                 record.Date = new DateOnly(DateTime.Now.Year, month, day);
             }
 
+            //todo the format will be diff if not yet approved, maybe check the status first
             // Extract start and end times
             var actualTimeSpans = tds[4].SelectNodes(".//span");
             if (actualTimeSpans?.Count >= 6)
@@ -116,8 +117,7 @@ public class FmNetSeleniumService : IFmNetService
 
         return record;
     }
-    public FmNetSeleniumService()
-    {
+    private void InitializeDriver(){
         var options = new ChromeOptions();
         options.AddArgument("--headless"); // Run in headless mode
 
@@ -127,7 +127,6 @@ public class FmNetSeleniumService : IFmNetService
 
         _driver = new ChromeDriver(service, options);
     }
-
     public async Task<List<AttendanceRecord>> GetAttandanceRecords(DateOnly date)
     {
         //就労管理
@@ -155,6 +154,7 @@ public class FmNetSeleniumService : IFmNetService
 
     public async Task Login(string username, string password)
     {
+        InitializeDriver();
         // Login to FMNet
         await _driver.GoToUrl($"{Constants.FmNetBaseUrl}cws/cws", By.Id("login"));
         var uidField = _driver.FindElement(By.Name("uid"));
@@ -209,6 +209,7 @@ public class FmNetSeleniumService : IFmNetService
 
     public void Dispose()
     {
+        _driver?.Quit();
         _driver?.Dispose();
     }
 }
