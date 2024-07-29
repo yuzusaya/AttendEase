@@ -20,7 +20,10 @@ public record AttendanceRecord
         StringBuilder sb = new StringBuilder();
         sb.AppendLine($"{Date.ToString("dd/MM")}({Day.ToString()}) - {Status}:");
         sb.AppendLine($"Time: {StartTime.ToString()} - {EndTime.ToString()}");
-        sb.AppendLine($"Actual Time: {ActualStartTime.ToString()} - {ActualEndTime.ToString()}");
+        if (ActualStartTime != default || ActualEndTime != default)
+        {
+            sb.AppendLine($"Actual Time: {ActualStartTime.ToString()} - {ActualEndTime.ToString()}");
+        }
         if (!string.IsNullOrWhiteSpace(Remarks))
         {
             sb.AppendLine($"Remarks: {Remarks}");
@@ -31,7 +34,10 @@ public record AttendanceRecord
     {
         StringBuilder sb = new StringBuilder();
         sb.AppendLine($"{Date.ToString("dd/MM")}({Day.ToString()}):");
-        sb.AppendLine($"Time: {StartTime.ToString()} - {EndTime.ToString()}");
+        if (StartTime != default || EndTime != default)
+        {
+            sb.AppendLine($"Time: {StartTime.ToString()} - {EndTime.ToString()}");
+        }
         sb.AppendLine($"Actual Time that will be key in: {SuggestedStartTime.ToString()} - {SuggestedEndTime.ToString()}");
         if (!string.IsNullOrWhiteSpace(Remarks))
         {
