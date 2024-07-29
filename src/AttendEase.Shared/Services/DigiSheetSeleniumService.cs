@@ -49,6 +49,10 @@ public class DigiSheetSeleniumService : IDigiSheetService
             //get parent of parent
             var trElement = inputElement.FindElement(By.XPath("../.."));
             var record = ConvertToAttendanceRecordFromAttendanceRowHtml(trElement.GetAttribute("innerHTML"));
+            if (record.Date > DateOnly.FromDateTime(DateTime.Today))
+            {
+                break;
+            }
             records.Add(record);
             Console.WriteLine(record);
         }
@@ -69,7 +73,7 @@ public class DigiSheetSeleniumService : IDigiSheetService
         {
             //../Image/shionin.gif
             var shioninImage = tds[0].SelectSingleNode("//img");
-            #warning need to check html of other status
+#warning need to check html of other status
             if (shioninImage != null)
             {
                 record.Status = shioninImage.GetAttributeValue("src", "").Contains("/shionin.gif") ? AttendanceStatus.Submitted : AttendanceStatus.Approved;
@@ -180,7 +184,8 @@ public class DigiSheetSeleniumService : IDigiSheetService
             throw new Exception($"Date {dateNameFormat} not found in the attendance report");
         }
     }
-    private void SubmitChanges(){
+    private void SubmitChanges()
+    {
         //find all checkbox
         var checkBoxes = _driver.FindElements(By.XPath("//input[@type='checkbox']"));
         foreach (var checkBox in checkBoxes)

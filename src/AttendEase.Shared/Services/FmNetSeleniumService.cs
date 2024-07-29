@@ -117,7 +117,8 @@ public class FmNetSeleniumService : IFmNetService
 
         return record;
     }
-    private void InitializeDriver(){
+    private void InitializeDriver()
+    {
         var options = new ChromeOptions();
         options.AddArgument("--headless"); // Run in headless mode
 
@@ -146,6 +147,10 @@ public class FmNetSeleniumService : IFmNetService
         foreach (var row in attendanceRows)
         {
             var record = ConvertToAttendanceRecordFromAttendanceRowHtml(row);
+            if (record.Date > DateOnly.FromDateTime(DateTime.Today))
+            {
+                break;
+            }
             records.Add(record);
             Console.WriteLine(record);
         }
