@@ -12,7 +12,7 @@ public class DigiSheetSeleniumService : IDigiSheetService
     private void InitializeDriver()
     {
         var options = new ChromeOptions();
-        //options.AddArgument("--headless"); // Run in headless mode
+        options.AddArgument("--headless=new"); // Run in headless mode
 
         // Configure ChromeDriverService to run without a window
         var service = ChromeDriverService.CreateDefaultService();
