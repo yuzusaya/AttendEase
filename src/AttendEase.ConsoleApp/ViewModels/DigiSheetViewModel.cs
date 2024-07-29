@@ -18,32 +18,38 @@ public class DigiSheetViewModel
 
     public void GetCredentials()
     {
-        Console.WriteLine("Enter your DigiSheet username (Press the enter key if not applicable):");
-        Username = Console.ReadLine();
         if (string.IsNullOrWhiteSpace(Username))
         {
-            throw new Exception("");
+            Console.WriteLine("Enter your DigiSheet username (Press the enter key if not applicable):");
+            Username = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(Username))
+            {
+                throw new Exception("");
+            }
+            Console.WriteLine("Enter your DigiSheet password:");
         }
-        Console.WriteLine("Enter your DigiSheet password:");
-        Password = string.Empty;
-        ConsoleKey key;
-        do
+        if (string.IsNullOrWhiteSpace(Password))
         {
-            var keyInfo = Console.ReadKey(intercept: true);
-            key = keyInfo.Key;
+            Password = string.Empty;
+            ConsoleKey key;
+            do
+            {
+                var keyInfo = Console.ReadKey(intercept: true);
+                key = keyInfo.Key;
 
-            if (key == ConsoleKey.Backspace && Password.Length > 0)
-            {
-                Console.Write("\b \b");
-                Password = Password[0..^1];
-            }
-            else if (!char.IsControl(keyInfo.KeyChar))
-            {
-                Console.Write("*");
-                Password += keyInfo.KeyChar;
-            }
-        } while (key != ConsoleKey.Enter);
-        Console.WriteLine("");
+                if (key == ConsoleKey.Backspace && Password.Length > 0)
+                {
+                    Console.Write("\b \b");
+                    Password = Password[0..^1];
+                }
+                else if (!char.IsControl(keyInfo.KeyChar))
+                {
+                    Console.Write("*");
+                    Password += keyInfo.KeyChar;
+                }
+            } while (key != ConsoleKey.Enter);
+            Console.WriteLine("");
+        }
         if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
         {
             throw new Exception("Username and password cannot be empty");

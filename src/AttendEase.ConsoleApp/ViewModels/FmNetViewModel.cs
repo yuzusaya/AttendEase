@@ -14,28 +14,35 @@ public class FmNetViewModel
 
     public void GetCredentials()
     {
-        Console.WriteLine("Enter your username (FM-Net):");
-        Username = Console.ReadLine();
-        Console.WriteLine("Enter your password (FM-Net):");
-        Password = string.Empty;
-        ConsoleKey key;
-        do
+        if (string.IsNullOrWhiteSpace(Username))
         {
-            var keyInfo = Console.ReadKey(intercept: true);
-            key = keyInfo.Key;
+            Console.WriteLine("Enter your username (FM-Net):");
+            Username = Console.ReadLine();
+        }
+        if (string.IsNullOrWhiteSpace(Password))
+        {
 
-            if (key == ConsoleKey.Backspace && Password.Length > 0)
+            Console.WriteLine("Enter your password (FM-Net):");
+            Password = string.Empty;
+            ConsoleKey key;
+            do
             {
-                Console.Write("\b \b");
-                Password = Password[0..^1];
-            }
-            else if (!char.IsControl(keyInfo.KeyChar))
-            {
-                Console.Write("*");
-                Password += keyInfo.KeyChar;
-            }
-        } while (key != ConsoleKey.Enter);
-        Console.WriteLine("");
+                var keyInfo = Console.ReadKey(intercept: true);
+                key = keyInfo.Key;
+
+                if (key == ConsoleKey.Backspace && Password.Length > 0)
+                {
+                    Console.Write("\b \b");
+                    Password = Password[0..^1];
+                }
+                else if (!char.IsControl(keyInfo.KeyChar))
+                {
+                    Console.Write("*");
+                    Password += keyInfo.KeyChar;
+                }
+            } while (key != ConsoleKey.Enter);
+            Console.WriteLine("");
+        }
         if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
         {
             throw new Exception("Username and password cannot be empty");
