@@ -29,11 +29,10 @@ try
     await fmNetViewModel.Login();
     var fmNetAttendanceRecords = await fmNetViewModel.GetAttendanceRecords(DateOnly.FromDateTime(currentTime));
     await fmNetViewModel.SubmitAttendance();
-    fmNetViewModel.Dispose();
 
     digiSheetViewModel.GetCredentials();
     await digiSheetViewModel.Login();
-    var digiSheetPendingSubmitRecords = await digiSheetViewModel.GetAttendanceRecords(DateOnly.FromDateTime(currentTime));
+    await digiSheetViewModel.GetAttendanceRecords(DateOnly.FromDateTime(currentTime));
     await digiSheetViewModel.SubmitAttendance(fmNetAttendanceRecords);
 
 }
