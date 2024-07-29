@@ -125,10 +125,10 @@ public class DigiSheetSeleniumService : IDigiSheetService
             // }
 
             // Extract remarks from 13th node
-            var remarksNode = tds[12].SelectSingleNode("//font");
+            var remarksNode = tds[12].SelectSingleNode("div/font");
             if (remarksNode != null)
             {
-                record.Remarks = remarksNode.InnerText;
+                record.Remarks = remarksNode.InnerText.Replace("&nbsp;", "").Replace("\r\n", "").Trim();
             }
         }
         return record;
