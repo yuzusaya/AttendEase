@@ -17,10 +17,20 @@ string digiSheetUserName = config?.GetValue<string>("DigiSheet:UserName");
 string digiSheetPassword = config?.GetValue<string>("DigiSheet:Password");
 string fmNetUserName = config?.GetValue<string>("FmNet:UserName");
 string fmNetPassword = config?.GetValue<string>("FmNet:Password");
+string encryptionPassphrase = config?.GetValue<string>("EncryptionPassphrase");
+if (!string.IsNullOrWhiteSpace(encryptionPassphrase))
+{
+    if (!string.IsNullOrWhiteSpace(digiSheetPassword))
+    {
+        digiSheetViewModel.Password = await EncryptionService.DecryptAsync(digiSheetPassword,encryptionPassphrase);
+    }
+    if (!string.IsNullOrWhiteSpace(fmNetPassword))
+    {
+        fmNetViewModel.Password = await EncryptionService.DecryptAsync(fmNetPassword,encryptionPassphrase);
+    }
+}
 digiSheetViewModel.Username = digiSheetUserName ?? "";
-digiSheetViewModel.Password = digiSheetPassword ?? "";
 fmNetViewModel.Username = fmNetUserName ?? "";
-fmNetViewModel.Password = fmNetPassword ?? "";
 #endregion
 
 try
@@ -31,6 +41,7 @@ try
     await fmNetViewModel.SubmitAttendance();
 
     digiSheetViewModel.GetCredentials();
+    Console.WriteLine("---------------------------------------------------------------------------");
     await digiSheetViewModel.Login();
     await digiSheetViewModel.GetAttendanceRecords(DateOnly.FromDateTime(currentTime));
     await digiSheetViewModel.SubmitAttendance(fmNetAttendanceRecords);
