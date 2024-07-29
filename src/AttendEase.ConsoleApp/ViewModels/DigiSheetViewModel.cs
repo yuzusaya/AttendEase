@@ -84,8 +84,9 @@ public class DigiSheetViewModel
                 }
                 record.ActualStartTime = attendanceRecordInFmNet.SuggestedStartTime;
                 record.ActualEndTime = attendanceRecordInFmNet.SuggestedEndTime;
-
+                Console.WriteLine("---------------------------------------------------------------------------");
                 Console.WriteLine(record.ToString(1));
+                Console.WriteLine("---------------------------------------------------------------------------");
                 Console.WriteLine("Submit to DigiSheet? (Y/N)");
                 var keyInfo = Console.ReadKey(intercept: true);
                 if (keyInfo.Key != ConsoleKey.Y)

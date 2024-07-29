@@ -72,7 +72,9 @@ public class FmNetViewModel
         {
             try
             {
+                Console.WriteLine("---------------------------------------------------------------------------");
                 Console.WriteLine(record.ToString(1));
+                Console.WriteLine("---------------------------------------------------------------------------");
                 Console.WriteLine("Submit to FM-Net? (Y/N)");
                 var keyInfo = Console.ReadKey(intercept: true);
                 if (keyInfo.Key != ConsoleKey.Y)
