@@ -206,6 +206,7 @@ public class DigiSheetSeleniumService : IDigiSheetService
         selectElement.SelectByValue(startTime.Hour.ToString());
 
         var minuteStartInput = _driver.FindElement(By.Name("MinuteStart"));
+        minuteStartInput.Clear();
         minuteStartInput.SendKeys(startTime.Minute.ToString());
 
         var hourEndInput = _driver.FindElement(By.Name("HourEnd"));//drop down
@@ -213,15 +214,24 @@ public class DigiSheetSeleniumService : IDigiSheetService
         selectElement.SelectByValue(endTime.Hour.ToString());
 
         var minuteEndInput = _driver.FindElement(By.Name("MinuteEnd"));
+        minuteEndInput.Clear();
         minuteEndInput.SendKeys(endTime.Minute.ToString());
 
         //find input with name restAdjust(if exists,click it)
-        var restAdjustInput = _driver.FindElement(By.Name("restAdjust"));
-        if (restAdjustInput != null)
+        try
         {
-            restAdjustInput.Click();
+            var restAdjustInput = _driver.FindElement(By.Name("restAdjust"));
+            if (restAdjustInput != null)
+            {
+                restAdjustInput.Click();
+            }
+        }
+        catch (Exception)
+        {
+            //ignore
         }
         var commentInput = _driver.FindElement(By.Name("CommentInput"));
+        commentInput.Clear();
         commentInput.SendKeys(remarks);
 
         var hourRestInput = _driver.FindElement(By.Name("HourRest"));//drop down
