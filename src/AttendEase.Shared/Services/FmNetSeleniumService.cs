@@ -130,6 +130,8 @@ public class FmNetSeleniumService : IFmNetService
     }
     public async Task<List<AttendanceRecord>> GetAttandanceRecords(DateOnly date)
     {
+        //prev button id : TOPRVTM
+        //next button id : TONXTTM
         //就労管理
         var laborManagementAnchor = _driver.FindElement(By.XPath($"//a[contains(text(), '就労管理')]"));
         var laborManagementLink = laborManagementAnchor.GetAttribute("href");

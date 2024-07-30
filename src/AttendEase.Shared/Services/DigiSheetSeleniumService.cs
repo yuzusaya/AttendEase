@@ -29,6 +29,8 @@ public class DigiSheetSeleniumService : IDigiSheetService
 
     public async Task<List<AttendanceRecord>> GetAttandanceRecords(DateOnly date)
     {
+        // var previousBtn = _driver.FindElement(By.XPath("//input[@value='＜＜']"));
+        // var nextBtn = _driver.FindElement(By.XPath("//input[@value='＞＞']"));
         var records = new List<AttendanceRecord>();
         var attendanceReportDiv = _driver.FindElement(By.XPath($"//div[contains(text(), '勤務報告')]"));
         var attendanceReportAnchor = attendanceReportDiv.FindElement(By.XPath(".."));
@@ -37,13 +39,8 @@ public class DigiSheetSeleniumService : IDigiSheetService
         WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(Constants.PageTimeoutSeconds));
         wait.Until(d => d.FindElement(By.Name("main")));
         _driver.SwitchTo().Frame("main");
-        //inside StaffWorkSheet, get the first table
-        // var staffWorkSheetForm = _driver.FindElement(By.Name("StaffWorkSheet"));
-        var attendanceTable = _driver.FindElement(By.XPath("//table"));
-        //inside the table, get the first table
-        var attendanceInnerTable = attendanceTable.FindElement(By.XPath("//table"));
         //get all tr which contains input with name starts with DayTable_WorkDate
-        var inputElements = attendanceInnerTable.FindElements(By.XPath("//input[starts-with(@name, 'DayTable_WorkDate')]"));
+        var inputElements = _driver.FindElements(By.XPath("//input[starts-with(@name, 'DayTable_WorkDate')]"));
         foreach (var inputElement in inputElements)
         {
             //get parent of parent
