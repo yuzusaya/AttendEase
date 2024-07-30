@@ -72,6 +72,8 @@ public class FmNetViewModel
         {
             try
             {
+                record.ActualStartTime = record.SuggestedStartTime;
+                record.ActualEndTime = record.SuggestedEndTime;
                 Console.WriteLine("---------------------------------------------------------------------------");
                 Console.WriteLine(record.ToString(1));
                 Console.WriteLine("---------------------------------------------------------------------------");
@@ -81,7 +83,7 @@ public class FmNetViewModel
                 {
                     continue;
                 }
-                await _fmNetService.SubmitAttendance(record.Date, record.SuggestedStartTime, record.SuggestedEndTime);
+                await _fmNetService.SubmitAttendance(record.Date, record.ActualStartTime, record.ActualEndTime);
                 Console.WriteLine($"Submitted {record.Date} to FM-Net");
             }
             catch (Exception ex)

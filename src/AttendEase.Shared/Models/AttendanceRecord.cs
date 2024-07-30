@@ -38,7 +38,10 @@ public record AttendanceRecord
         {
             sb.AppendLine($"Time: {StartTime.ToString()} - {EndTime.ToString()}");
         }
-        sb.AppendLine($"Actual Time that will be key in: {SuggestedStartTime.ToString()} - {SuggestedEndTime.ToString()}");
+        if(ActualStartTime != default || ActualEndTime != default)
+        {
+            sb.AppendLine($"Actual Time that will be key in: {ActualStartTime.ToString()} - {ActualEndTime.ToString()}");
+        }
         if (!string.IsNullOrWhiteSpace(Remarks))
         {
             sb.AppendLine($"Remarks: {Remarks}");
