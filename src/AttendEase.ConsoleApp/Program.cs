@@ -29,6 +29,11 @@ if (!string.IsNullOrWhiteSpace(encryptionPassphrase))
         fmNetViewModel.Password = await EncryptionService.DecryptAsync(fmNetPassword,encryptionPassphrase);
     }
 }
+else
+{
+    digiSheetViewModel.Password = digiSheetPassword ?? "";
+    fmNetViewModel.Password = fmNetPassword ?? "";
+}
 digiSheetViewModel.Username = digiSheetUserName ?? "";
 fmNetViewModel.Username = fmNetUserName ?? "";
 #endregion
