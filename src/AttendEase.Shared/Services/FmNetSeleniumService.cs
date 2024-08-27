@@ -120,7 +120,7 @@ public class FmNetSeleniumService : IFmNetService
     private void InitializeDriver()
     {
         var options = new ChromeOptions();
-        options.AddArgument("--headless=new"); // Run in headless mode
+        //options.AddArgument("--headless=new"); // Run in headless mode
 
         // Configure ChromeDriverService to run without a window
         var service = ChromeDriverService.CreateDefaultService();
@@ -133,15 +133,20 @@ public class FmNetSeleniumService : IFmNetService
         //prev button id : TOPRVTM
         //next button id : TONXTTM
         //就労管理
-        var laborManagementAnchor = _driver.FindElement(By.XPath($"//a[contains(text(), '就労管理')]"));
+        var laborManagementAnchor = _driver.FindElement(By.XPath("//a[.//descendant::*[contains(text(), '就労管理')]]"));
         var laborManagementLink = laborManagementAnchor.GetAttribute("href");
-        await _driver.GoToUrl(laborManagementLink, By.XPath("//a[contains(text(), '勤務実績入力')]"));
+        await _driver.GoToUrl(laborManagementLink, By.ClassName("today"));
+
+        var calendarCellDiv = _driver.FindElement(By.ClassName("today"));
+        calendarCellDiv.Click();
         //勤務実績入力
-        var workInputAnchor = _driver.FindElement(By.XPath($"//a[contains(text(), '勤務実績入力')]"));
-        var workInputLink = workInputAnchor.GetAttribute("href");
-        //input form
-        await _driver.GoToUrl(workInputLink, By.Name("APPROVALGRD"));
+        WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(Constants.PageTimeoutSeconds));
+        wait.Until(d => d.FindElement(By.XPath($"//div[contains(text(), '勤務実績入力')]")));
+        var workInputDiv = _driver.FindElement(By.XPath($"//div[contains(text(), '勤務実績入力')]"));
+        workInputDiv.Click();
+
         //get table
+        wait.Until(d => d.FindElement(By.Name("APPROVALGRD")));
         var attendanceTable = _driver.FindElement(By.Name("APPROVALGRD"));
         var attendanceTableHtml = attendanceTable.GetAttribute("innerHTML");
         var attendanceRows = GetAttendanceRowsFromAttendanceTableHtml(attendanceTableHtml);
@@ -163,7 +168,7 @@ public class FmNetSeleniumService : IFmNetService
     {
         InitializeDriver();
         // Login to FMNet
-        await _driver.GoToUrl($"{Constants.FmNetBaseUrl}cws/cws", By.Id("login"));
+        await _driver.GoToUrl($"{Constants.FmNetBaseUrl}self-workflow/cws/cws", By.Id("login"));
         var uidField = _driver.FindElement(By.Name("uid"));
         uidField.SendKeys(username);
         var pwdField = _driver.FindElement(By.Name("pwd"));
