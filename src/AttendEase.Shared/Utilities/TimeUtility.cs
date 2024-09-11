@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace AttendEase.Shared.Utilities;
 public static class TimeUtility
 {
-    public const int MinDiff = 8;
-    public const int MaxDiff = 15;
+    public const int MinDiff = 10;
+    public const int MaxDiff = 20;
 
     private static bool WithinRange(TimeOnly time1, TimeOnly time2)
     {
