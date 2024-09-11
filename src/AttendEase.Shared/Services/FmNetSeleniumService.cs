@@ -3,6 +3,7 @@ using AttendEase.Shared.Models;
 using HtmlAgilityPack;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
 
 namespace AttendEase.Shared.Services;
@@ -211,7 +212,22 @@ public class FmNetSeleniumService : IFmNetService
         selectElement.SelectByValue(endTime.Hour.ToString());
         selectElement = new SelectElement(endMinuteInput);
         selectElement.SelectByValue(endTime.Minute.ToString());
-        submitButton.Click();
+        while(true)
+        {
+            try
+            {
+                submitButton.Click();
+                break;
+            }
+            catch (ElementNotVisibleException e)
+            {
+                Console.WriteLine("Invisible: " + e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
 
         var confirmButtonElement = By.Id("dSubmission1");
         wait.Until(d => d.FindElement(confirmButtonElement));
