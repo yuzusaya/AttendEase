@@ -212,22 +212,7 @@ public class FmNetSeleniumService : IFmNetService
         selectElement.SelectByValue(endTime.Hour.ToString());
         selectElement = new SelectElement(endMinuteInput);
         selectElement.SelectByValue(endTime.Minute.ToString());
-        while(true)
-        {
-            try
-            {
-                submitButton.Click();
-                break;
-            }
-            catch (ElementNotVisibleException e)
-            {
-                Console.WriteLine("Invisible: " + e.Message);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
+        submitButton.Click();
 
         var confirmButtonElement = By.Id("dSubmission1");
         wait.Until(d => d.FindElement(confirmButtonElement));
