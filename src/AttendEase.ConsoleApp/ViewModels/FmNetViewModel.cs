@@ -50,8 +50,8 @@ public class FmNetViewModel
     }
     public FmNetViewModel()
     {
-        //_fmNetService = new FmNetPlaywrightService();
-        _fmNetService = new FmNetSeleniumService();
+        _fmNetService = new FmNetPlaywrightService();
+        //_fmNetService = new FmNetSeleniumService();
     }
     public async Task Login()
     {

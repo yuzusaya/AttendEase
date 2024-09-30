@@ -9,6 +9,10 @@ public class FmNetPlaywrightService : IFmNetService
 {
     private IBrowser _browser;
     private IPage _page;
+    private PageWaitForSelectorOptions _pageWaitForSelectorOptions = new PageWaitForSelectorOptions
+    {
+        State = WaitForSelectorState.Attached,
+    };
 
     private List<string> GetAttendanceRowsFromAttendanceTableHtml(string attendanceTableHtml)
     {
@@ -106,11 +110,12 @@ public class FmNetPlaywrightService : IFmNetService
 
         await _page.ClickAsync(".today");
 
-        await _page.WaitForSelectorAsync("//div[contains(text(), '勤務実績入力')]");
+        await _page.WaitForSelectorAsync("//div[contains(text(), '勤務実績入力')]", _pageWaitForSelectorOptions);
         await _page.ClickAsync("//div[contains(text(), '勤務実績入力')]");
 
-        await _page.WaitForSelectorAsync("table[name='APPROVALGRD']");
-        var attendanceTableHtml = await _page.GetAttributeAsync("table[name='APPROVALGRD']", "innerHTML");
+        await _page.WaitForSelectorAsync("table[name='APPROVALGRD']", _pageWaitForSelectorOptions);
+        var approvalGrid = await _page.QuerySelectorAsync("table[name='APPROVALGRD']");
+        var attendanceTableHtml = await approvalGrid.InnerHTMLAsync();
 
         var attendanceRows = GetAttendanceRowsFromAttendanceTableHtml(attendanceTableHtml);
         List<AttendanceRecord> records = new();
@@ -136,12 +141,12 @@ public class FmNetPlaywrightService : IFmNetService
         await _page.FillAsync("input[name='pwd']", password);
         await _page.ClickAsync("input[name='Login']");
 
-        await _page.WaitForSelectorAsync("#logout");
+        await _page.WaitForSelectorAsync("#logout", _pageWaitForSelectorOptions);
     }
 
     public async Task SubmitAttendance(DateOnly date, TimeOnly startTime, TimeOnly endTime, string remarks = "")
     {
-        await _page.WaitForSelectorAsync("table[name='APPROVALGRD']");
+        await _page.WaitForSelectorAsync("table[name='APPROVALGRD']", _pageWaitForSelectorOptions);
 
         var inputNameFormat = date.ToString("yyyy_M_d");
         var startHourInputName = $"K{inputNameFormat}0STH";
@@ -156,14 +161,14 @@ public class FmNetPlaywrightService : IFmNetService
         await _page.SelectOptionAsync($"#{endMinuteInputName}", endTime.Minute.ToString());
 
         await _page.ClickAsync($"#{submitButtonName}");
-        await _page.WaitForSelectorAsync("#dSubmission1");
+        await _page.WaitForSelectorAsync("#dSubmission1", _pageWaitForSelectorOptions);
         await _page.ClickAsync("#dSubmission1");
     }
     public void Dispose()
     {
         if (_browser != null)
         {
-            _browser.CloseAsync();
+            _browser.CloseAsync().Wait();
         }
     }
     public async ValueTask DisposeAsync()
