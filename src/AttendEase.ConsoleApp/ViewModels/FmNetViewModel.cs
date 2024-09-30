@@ -50,7 +50,7 @@ public class FmNetViewModel
     }
     public FmNetViewModel()
     {
-        _fmNetService = new FmNetSeleniumService();
+        _fmNetService = new FmNetPlaywrightService();
     }
     public async Task Login()
     {
@@ -59,7 +59,7 @@ public class FmNetViewModel
     }
     public async Task<List<AttendanceRecord>> GetAttendanceRecords(DateOnly date)
     {
-        Records = await _fmNetService.GetAttandanceRecords(date);
+        Records = await _fmNetService.GetAttendanceRecords(date);
         return Records;
     }
     public async Task SubmitAttendance()

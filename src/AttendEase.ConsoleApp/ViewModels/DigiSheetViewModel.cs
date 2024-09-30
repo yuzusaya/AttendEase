@@ -64,7 +64,7 @@ public class DigiSheetViewModel
 
     public async Task<List<AttendanceRecord>> GetAttendanceRecords(DateOnly date)
     {
-        Records = await _digiSheetService.GetAttandanceRecords(date);
+        Records = await _digiSheetService.GetAttendanceRecords(date);
         return Records;
     }
 
