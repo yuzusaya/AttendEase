@@ -129,7 +129,7 @@ public class FmNetSeleniumService : IFmNetService
 
         _driver = new ChromeDriver(service, options);
     }
-    public async Task<List<AttendanceRecord>> GetAttandanceRecords(DateOnly date)
+    public async Task<List<AttendanceRecord>> GetAttendanceRecords(DateOnly date)
     {
         //prev button id : TOPRVTM
         //next button id : TONXTTM

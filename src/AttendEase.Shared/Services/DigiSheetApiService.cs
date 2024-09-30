@@ -12,7 +12,7 @@ public class DigiSheetApiService : IDigiSheetService
         throw new NotImplementedException();
     }
 
-    public Task<List<AttendanceRecord>> GetAttandanceRecords(DateOnly date)
+    public Task<List<AttendanceRecord>> GetAttendanceRecords(DateOnly date)
     {
         throw new NotImplementedException();
     }

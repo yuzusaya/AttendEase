@@ -27,7 +27,7 @@ public class DigiSheetSeleniumService : IDigiSheetService
         _driver?.Dispose();
     }
 
-    public async Task<List<AttendanceRecord>> GetAttandanceRecords(DateOnly date)
+    public async Task<List<AttendanceRecord>> GetAttendanceRecords(DateOnly date)
     {
         // var previousBtn = _driver.FindElement(By.XPath("//input[@value='＜＜']"));
         // var nextBtn = _driver.FindElement(By.XPath("//input[@value='＞＞']"));

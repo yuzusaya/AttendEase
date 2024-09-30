@@ -8,7 +8,7 @@ namespace AttendEase.Shared.Services;
 public interface IFmNetService
 {
     Task Login(string username, string password);
-    Task<List<AttendanceRecord>> GetAttandanceRecords(DateOnly date);
+    Task<List<AttendanceRecord>> GetAttendanceRecords(DateOnly date);
     Task SubmitAttendance(DateOnly date, TimeOnly startTime, TimeOnly endTime, string remarks = "");
     void Dispose();
 }
