@@ -9,7 +9,7 @@ public class DigiSheetViewModel
 
     public DigiSheetViewModel()
     {
-        _digiSheetService = new DigiSheetSeleniumService();
+        _digiSheetService = new DigiSheetPlaywrightService();
     }
 
     public string Username { get; set; }

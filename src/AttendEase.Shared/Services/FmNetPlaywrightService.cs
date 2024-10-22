@@ -173,9 +173,7 @@ public class FmNetPlaywrightService : IFmNetService
     }
     public async ValueTask DisposeAsync()
     {
-        if (_browser != null)
-        {
-            await _browser.CloseAsync();
-        }
+        if (_page != null) await _page.CloseAsync();
+        if (_browser != null) await _browser.CloseAsync();
     }
 }
