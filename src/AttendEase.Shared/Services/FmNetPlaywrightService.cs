@@ -141,7 +141,7 @@ public class FmNetPlaywrightService : IFmNetService
         await _page.FillAsync("input[name='pwd']", password);
         await _page.ClickAsync("input[name='Login']");
 
-        await _page.WaitForSelectorAsync("#logout", _pageWaitForSelectorOptions);
+        await _page.WaitForSelectorAsync("#global_user", _pageWaitForSelectorOptions);
     }
 
     public async Task SubmitAttendance(DateOnly date, TimeOnly startTime, TimeOnly endTime, string remarks = "")
