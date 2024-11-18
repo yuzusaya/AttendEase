@@ -176,9 +176,9 @@ public class DigiSheetPlaywrightService : IDigiSheetService
 
     private async Task SubmitChangesAsync()
     {
-        await _currentFrameLocator.Locator("//input[@type='checkbox']").WaitForAsync();
         //todo: page loading
         await Task.Delay(1000);
+        await _currentFrameLocator.Locator("//input[@type='checkbox']").WaitForAsync();
         var checkBoxes = _currentFrameLocator.Locator("//input[@type='checkbox']");
         var count = await checkBoxes.CountAsync();
         for (int i = 0; i < count; i++)
